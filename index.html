@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="Favicon.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="Favicon.png" sizes="16x16" />
+    <link rel="shortcut icon" href="Favicon.png" />
+    <link rel="apple-touch-icon" href="Favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mateo Agudelo — Marketing Consciente</title>
+    <meta name="description" content="Marketing Consciente · Meta Ads · Desarrollo Masculino — Mateo Agudelo">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #0a0a0a;
+            --bg-card: #111111;
+            --white: #ffffff;
+            --white-soft: #e0e0e0;
+            --white-muted: #999999;
+            --red: #C0392B;
+            --red-dark: #8B1A1A;
+            --gold: #C9A84C;
+            --gold-dim: rgba(201, 168, 76, 0.15);
+            --green: #1B5E20;
+            --green-bright: #2E7D32;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--white);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* ── Container ── */
+        .container {
+            width: 100%;
+            max-width: 480px;
+            padding: 2rem 1.25rem 3rem;
+        }
+
+        /* ── Header ── */
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .avatar-wrapper {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1.25rem;
+            animation: fadeSlideDown 0.8s ease both;
+        }
+
+        .avatar {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--gold);
+            box-shadow:
+                0 0 0 4px var(--bg),
+                0 0 20px rgba(201, 168, 76, 0.25);
+        }
+
+        .name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            margin-bottom: 0.4rem;
+            animation: fadeSlideDown 0.8s ease 0.15s both;
+        }
+
+        .tagline {
+            font-size: 0.85rem;
+            font-weight: 300;
+            color: var(--white-muted);
+            letter-spacing: 0.04em;
+            margin-bottom: 1.1rem;
+            animation: fadeSlideDown 0.8s ease 0.25s both;
+        }
+
+        .socials-row {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            animation: fadeSlideDown 0.8s ease 0.35s both;
+        }
+
+        .social-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.06);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .social-icon:hover {
+            background: rgba(255, 255, 255, 0.12);
+            transform: scale(1.1);
+        }
+
+        .social-icon svg {
+            width: 16px;
+            height: 16px;
+            fill: var(--white-soft);
+        }
+
+        /* ── Buttons ── */
+        .links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.9rem;
+        }
+
+        .link-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.9rem;
+            padding: 1rem 1.1rem;
+            border-radius: 14px;
+            background: var(--bg-card);
+            text-decoration: none;
+            color: var(--white);
+            border: 1px solid transparent;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+        }
+
+        .link-btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 14px;
+            opacity: 0;
+            transition: opacity 0.4s;
+            pointer-events: none;
+        }
+
+        .link-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .link-btn:active {
+            transform: translateY(0);
+        }
+
+        /* WhatsApp */
+        .link-btn.whatsapp {
+            border-color: rgba(27, 94, 32, 0.35);
+        }
+        .link-btn.whatsapp::before {
+            background: radial-gradient(ellipse at 30% 50%, rgba(46, 125, 50, 0.12), transparent 70%);
+        }
+        .link-btn.whatsapp:hover {
+            border-color: rgba(46, 125, 50, 0.6);
+            box-shadow: 0 4px 25px rgba(46, 125, 50, 0.15);
+        }
+        .link-btn.whatsapp:hover::before { opacity: 1; }
+        .link-btn.whatsapp .btn-icon {
+            background: rgba(46, 125, 50, 0.15);
+            color: var(--green-bright);
+        }
+
+        /* Ethereal / Gold */
+        .link-btn.ethereal {
+            border-color: rgba(201, 168, 76, 0.25);
+        }
+        .link-btn.ethereal::before {
+            background: radial-gradient(ellipse at 30% 50%, rgba(201, 168, 76, 0.1), transparent 70%);
+        }
+        .link-btn.ethereal:hover {
+            border-color: rgba(201, 168, 76, 0.55);
+            box-shadow: 0 4px 25px rgba(201, 168, 76, 0.15);
+        }
+        .link-btn.ethereal:hover::before { opacity: 1; }
+        .link-btn.ethereal .btn-icon {
+            background: var(--gold-dim);
+            color: var(--gold);
+        }
+
+        /* Red (Infoproducto) */
+        .link-btn.red {
+            border-color: rgba(192, 57, 43, 0.3);
+        }
+        .link-btn.red::before {
+            background: radial-gradient(ellipse at 30% 50%, rgba(192, 57, 43, 0.1), transparent 70%);
+        }
+        .link-btn.red:hover {
+            border-color: rgba(192, 57, 43, 0.6);
+            box-shadow: 0 4px 25px rgba(192, 57, 43, 0.15);
+        }
+        .link-btn.red:hover::before { opacity: 1; }
+        .link-btn.red .btn-icon {
+            background: rgba(192, 57, 43, 0.15);
+            color: var(--red);
+        }
+
+        /* Facebook */
+        .link-btn.facebook {
+            border-color: rgba(24, 119, 242, 0.3);
+        }
+        .link-btn.facebook::before {
+            background: radial-gradient(ellipse at 30% 50%, rgba(24, 119, 242, 0.1), transparent 70%);
+        }
+        .link-btn.facebook:hover {
+            border-color: rgba(24, 119, 242, 0.6);
+            box-shadow: 0 4px 25px rgba(24, 119, 242, 0.15);
+        }
+        .link-btn.facebook:hover::before { opacity: 1; }
+        .link-btn.facebook .btn-icon {
+            background: rgba(24, 119, 242, 0.15);
+            color: #1877F2;
+        }
+
+        /* Instagram */
+        .link-btn.instagram {
+            border-color: rgba(192, 57, 43, 0.25);
+        }
+        .link-btn.instagram::before {
+            background: radial-gradient(ellipse at 20% 50%, rgba(192, 57, 43, 0.08), rgba(201, 168, 76, 0.06) 60%, transparent 80%);
+        }
+        .link-btn.instagram:hover {
+            border-color: rgba(192, 57, 43, 0.5);
+            box-shadow: 0 4px 25px rgba(192, 57, 43, 0.12), 0 4px 25px rgba(201, 168, 76, 0.08);
+        }
+        .link-btn.instagram:hover::before { opacity: 1; }
+        .link-btn.instagram .btn-icon {
+            background: linear-gradient(135deg, rgba(192, 57, 43, 0.18), rgba(201, 168, 76, 0.18));
+            color: var(--red);
+        }
+
+        /* Button icon container */
+        .btn-icon {
+            flex-shrink: 0;
+            width: 44px;
+            height: 44px;
+            border-radius: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.15rem;
+            transition: transform 0.3s;
+        }
+
+        .link-btn:hover .btn-icon {
+            transform: scale(1.08);
+        }
+
+        .btn-icon svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        /* ── Wing icon (Ethereal) ── */
+        .icon-wing {
+            position: relative;
+            width: 24px;
+            height: 22px;
+        }
+
+        .icon-wing::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 22px;
+            height: 20px;
+            border-top: 2px solid var(--gold);
+            border-right: 2px solid var(--gold);
+            border-bottom: none;
+            border-left: none;
+            border-radius: 0 92% 0 0;
+            transform: rotate(-12deg);
+            transform-origin: bottom left;
+        }
+
+        .icon-wing::after {
+            content: '';
+            position: absolute;
+            bottom: 3px;
+            left: 4px;
+            width: 14px;
+            height: 13px;
+            border-top: 1.5px solid var(--gold);
+            border-right: 1.5px solid var(--gold);
+            border-bottom: none;
+            border-left: none;
+            border-radius: 0 88% 0 0;
+            transform: rotate(-8deg);
+            transform-origin: bottom left;
+            opacity: 0.45;
+        }
+
+        /* ── Monogram icon (Infoproducto) ── */
+        .icon-monogram {
+            position: relative;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--red);
+            line-height: 1;
+            font-style: italic;
+            overflow: visible;
+        }
+
+        .icon-monogram::after {
+            content: '';
+            position: absolute;
+            width: 130%;
+            height: 1.8px;
+            background: linear-gradient(90deg, transparent, var(--red-dark) 20%, var(--red-dark) 80%, transparent);
+            top: 52%;
+            left: -15%;
+            transform: rotate(-22deg);
+        }
+
+        .btn-text {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .btn-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.05rem;
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: 0.15rem;
+        }
+
+        .btn-subtitle {
+            font-size: 0.75rem;
+            font-weight: 300;
+            color: var(--white-muted);
+            line-height: 1.3;
+        }
+
+        .btn-arrow {
+            flex-shrink: 0;
+            color: var(--white-muted);
+            font-size: 0.85rem;
+            transition: transform 0.3s, color 0.3s;
+        }
+
+        .link-btn:hover .btn-arrow {
+            transform: translateX(3px);
+            color: var(--white-soft);
+        }
+
+        /* ── Stagger animations ── */
+        .link-btn:nth-child(1) { animation: fadeSlideUp 0.6s ease 0.45s both; }
+        .link-btn:nth-child(2) { animation: fadeSlideUp 0.6s ease 0.57s both; }
+        .link-btn:nth-child(3) { animation: fadeSlideUp 0.6s ease 0.69s both; }
+        .link-btn:nth-child(4) { animation: fadeSlideUp 0.6s ease 0.81s both; }
+        .link-btn:nth-child(5) { animation: fadeSlideUp 0.6s ease 0.93s both; }
+        .link-btn:nth-child(6) { animation: fadeSlideUp 0.6s ease 1.05s both; }
+        .link-btn:nth-child(7) { animation: fadeSlideUp 0.6s ease 1.17s both; }
+
+        /* TikTok */
+        .link-btn.tiktok {
+            border-color: rgba(255, 255, 255, 0.18);
+        }
+        .link-btn.tiktok::before {
+            background: radial-gradient(ellipse at 30% 50%, rgba(255, 255, 255, 0.05), transparent 70%);
+        }
+        .link-btn.tiktok:hover {
+            border-color: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 4px 25px rgba(255, 255, 255, 0.08);
+        }
+        .link-btn.tiktok:hover::before { opacity: 1; }
+        .link-btn.tiktok .btn-icon {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--white);
+        }
+
+        /* YouTube */
+        .link-btn.youtube {
+            border-color: rgba(255, 0, 0, 0.25);
+        }
+        .link-btn.youtube::before {
+            background: radial-gradient(ellipse at 30% 50%, rgba(255, 0, 0, 0.08), transparent 70%);
+        }
+        .link-btn.youtube:hover {
+            border-color: rgba(255, 0, 0, 0.5);
+            box-shadow: 0 4px 25px rgba(255, 0, 0, 0.12);
+        }
+        .link-btn.youtube:hover::before { opacity: 1; }
+        .link-btn.youtube .btn-icon {
+            background: rgba(255, 0, 0, 0.12);
+            color: #FF0000;
+        }
+
+        /* ── Video ── */
+        .video-section {
+            margin-top: 2rem;
+            animation: fadeSlideUp 0.6s ease 1.29s both;
+        }
+
+        .video-wrapper {
+            position: relative;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow:
+                0 4px 30px rgba(201, 168, 76, 0.12),
+                0 0 0 1px rgba(201, 168, 76, 0.15);
+        }
+
+        .video-wrapper video {
+            display: block;
+            width: 100%;
+            height: auto;
+            border-radius: 14px;
+        }
+
+        /* ── Footer ── */
+        .footer {
+            text-align: center;
+            margin-top: 2.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            animation: fadeSlideUp 0.6s ease 1.4s both;
+        }
+
+        .footer-copy {
+            font-size: 0.78rem;
+            color: var(--white-muted);
+            font-weight: 400;
+            margin-bottom: 0.25rem;
+        }
+
+        .footer-sub {
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.3);
+            font-weight: 300;
+            letter-spacing: 0.03em;
+        }
+
+        /* ── Keyframes ── */
+        @keyframes fadeSlideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-16px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ── Responsive tweaks ── */
+        @media (min-width: 520px) {
+            .container {
+                padding: 3rem 1.5rem 4rem;
+            }
+            .avatar {
+                width: 120px;
+                height: 120px;
+            }
+            .name {
+                font-size: 2.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- ════ HEADER ════ -->
+    <header class="header">
+        <div class="avatar-wrapper">
+            <img src="Foto Mia.jpeg" alt="Mateo Agudelo" class="avatar">
+        </div>
+
+        <h1 class="name">Mateo Agudelo</h1>
+        <p class="tagline">Marketing Consciente · Meta Ads · Desarrollo Masculino</p>
+
+        <div class="socials-row">
+            <a href="https://instagram.com/teo_aagudelo" target="_blank" rel="noopener" class="social-icon" aria-label="Instagram">
+                <svg viewBox="0 0 24 24"><path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5a4.25 4.25 0 0 0 4.25-4.25v-8.5A4.25 4.25 0 0 0 16.25 3.5h-8.5zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 1.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7zm5.25-2.5a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/></svg>
+            </a>
+            <a href="https://www.facebook.com/profile.php?id=61582489626424" target="_blank" rel="noopener" class="social-icon" aria-label="Facebook">
+                <svg viewBox="0 0 24 24"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg>
+            </a>
+        </div>
+    </header>
+
+    <!-- ════ LINKS ════ -->
+    <nav class="links">
+
+        <!-- WhatsApp -->
+        <a href="https://wa.me/573187855875" target="_blank" rel="noopener" class="link-btn whatsapp">
+            <span class="btn-icon">
+                <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12.05 21.785h-.01a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.981.998-3.648-.235-.374A9.86 9.86 0 0 1 2.17 12.01C2.17 6.58 6.58 2.17 12.04 2.17c2.655 0 5.15 1.035 7.026 2.91A9.88 9.88 0 0 1 21.92 12.02c-.004 5.44-4.414 9.86-9.87 9.87v-.1zM12.05.17C5.495.17.17 5.494.17 12.01c0 2.086.545 4.12 1.58 5.917L.057 24l6.228-1.634a11.86 11.86 0 0 0 5.758 1.47h.005c6.557 0 11.88-5.325 11.885-11.87A11.82 11.82 0 0 0 20.42 3.49 11.79 11.79 0 0 0 12.05.17z"/></svg>
+            </span>
+            <span class="btn-text">
+                <span class="btn-title">Escríbeme por WhatsApp</span>
+                <span class="btn-subtitle">Atiendo ambas marcas · Respondo rápido</span>
+            </span>
+            <span class="btn-arrow">›</span>
+        </a>
+
+        <!-- Ethereal Agency -->
+        <a href="https://etherealgrowthagency.com" target="_blank" rel="noopener" class="link-btn ethereal">
+            <span class="btn-icon">
+                <span class="icon-wing"></span>
+            </span>
+            <span class="btn-text">
+                <span class="btn-title">Escala tu negocio con Meta Ads</span>
+                <span class="btn-subtitle">Gestión profesional de publicidad</span>
+            </span>
+            <span class="btn-arrow">›</span>
+        </a>
+
+        <!-- Infoproducto -->
+        <a href="https://aagudelosales.hotmart.host/5-principios-para-salir-de-la-pobreza-mental-a0021f87-5fb3-4b6d-82b3-123e2604b549" target="_blank" rel="noopener" class="link-btn red">
+            <span class="btn-icon">
+                <span class="icon-monogram">A</span>
+            </span>
+            <span class="btn-text">
+                <span class="btn-title">5 Principios para Dejar la Pobreza Mental</span>
+                <span class="btn-subtitle">Transforma tu mentalidad ahora</span>
+            </span>
+            <span class="btn-arrow">›</span>
+        </a>
+
+        <!-- Facebook -->
+        <a href="https://www.facebook.com/profile.php?id=61582489626424" target="_blank" rel="noopener" class="link-btn facebook">
+            <span class="btn-icon">
+                <svg viewBox="0 0 24 24"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg>
+            </span>
+            <span class="btn-text">
+                <span class="btn-title">Sígueme en Facebook</span>
+                <span class="btn-subtitle">Contenido diario de valor</span>
+            </span>
+            <span class="btn-arrow">›</span>
+        </a>
+
+        <!-- Instagram -->
+        <a href="https://instagram.com/teo_aagudelo" target="_blank" rel="noopener" class="link-btn instagram">
+            <span class="btn-icon">
+                <svg viewBox="0 0 24 24"><path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5a4.25 4.25 0 0 0 4.25-4.25v-8.5A4.25 4.25 0 0 0 16.25 3.5h-8.5zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 1.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7zm5.25-2.5a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/></svg>
+            </span>
+            <span class="btn-text">
+                <span class="btn-title">Sígueme en Instagram</span>
+                <span class="btn-subtitle">@teo_aagudelo</span>
+            </span>
+            <span class="btn-arrow">›</span>
+        </a>
+
+        <!-- TikTok -->
+        <a href="https://www.tiktok.com/@teo_aagudelo" target="_blank" rel="noopener" class="link-btn tiktok">
+            <span class="btn-icon">
+                <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 0 0-.79-.05A6.34 6.34 0 0 0 3.15 15a6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V9.37a8.16 8.16 0 0 0 4.76 1.52v-3.4a4.85 4.85 0 0 1-1-.8z" fill="currentColor"/></svg>
+            </span>
+            <span class="btn-text">
+                <span class="btn-title">Sígueme en TikTok</span>
+                <span class="btn-subtitle">@teo_aagudelo</span>
+            </span>
+            <span class="btn-arrow">›</span>
+        </a>
+
+        <!-- YouTube -->
+        <a href="https://www.youtube.com/@AndresAgudelo-y7l" target="_blank" rel="noopener" class="link-btn youtube">
+            <span class="btn-icon">
+                <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" fill="currentColor"/></svg>
+            </span>
+            <span class="btn-text">
+                <span class="btn-title">Sígueme en YouTube</span>
+                <span class="btn-subtitle">@AndresAgudelo-y7l</span>
+            </span>
+            <span class="btn-arrow">›</span>
+        </a>
+
+    </nav>
+
+    <!-- ════ VIDEO ════ -->
+    <section class="video-section">
+        <div class="video-wrapper">
+            <video autoplay muted loop playsinline>
+                <source src="Video Diferenciando Marcas.mp4" type="video/mp4">
+            </video>
+        </div>
+    </section>
+
+    <!-- ════ FOOTER ════ -->
+    <footer class="footer">
+        <p class="footer-copy">&copy; 2026 Mateo Agudelo</p>
+        <p class="footer-sub">Marketing Consciente · Medellín, Colombia</p>
+    </footer>
+
+</div>
+
+</body>
+</html>
